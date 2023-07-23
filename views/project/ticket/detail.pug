@@ -1,0 +1,74 @@
+extends ../../layout
+
+block content
+  .row
+    .col-md-8
+      h1
+        | Ticket
+        small.text-muted
+          |  #{ticket.title}
+      p.lead #{ticket.description}
+    .col.text-end
+      a.btn.btn-outline-primary(href='/ticket/edit?pid=' + project.id + '&tid=' + ticket.id)
+        | Edit
+      a.btn.btn-danger(href='/ticket/delete?pid=' + project.id + '&tid=' + ticket.id)
+        | Delete
+    hr
+  .row
+    .col-md-4
+      h1
+        | Priority
+        small.text-muted
+          |  #{ticket.priority}
+    .col-md-4
+      h1
+        | Type
+        small.text-muted
+          |  #{ticket.type}
+    .col-md-4
+      h1
+        | Status
+        small.text-muted
+          |  #{ticket.status}
+  div(style="height: 60px;")
+  .row
+    .col-md-6
+      div.row.justify-content-between
+        div.col-4
+          h3
+            | Assignee
+        div.col-4.text-end
+          a(href='/ticket/addAssignee?pid=' + project.id + '&tid=' + ticket.id, class='btn btn-outline-primary')
+            | Add assignee
+      table(class='table table-striped table-bordered')
+            thead
+              tr
+                th Name
+                th Email
+                th Role
+            tbody
+              each assigne in ticket.assignee
+                tr
+                  td= assigne.name
+                  td= assigne.email
+                  td= assigne.role
+    .col-md-6
+      h1(style='text-align: center;') Comment Section
+
+      // Render existing comments from the backend
+      each comment in ticket.comments
+        .comment(style='border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;')
+          .row
+            .col
+              p.comment-author(style='margin: 5px 0;font-weight: bold;') #{comment.author}
+            .col.text-end
+              p.comment-date(style='margin: 5px 0;font-size: 11px') #{comment.date.toLocaleDateString(undefined, {day: 'numeric',month: 'short',year: 'numeric',})}
+          p.comment-content(style='margin: 5px 0;') #{comment.content}
+
+      // Add a form to submit new comments
+      form(action='/ticket/submitComment?pid=' + project.id + '&tid=' + ticket.id, method='post', style='margin-top: 20px;')
+        input(type='hidden', name='_csrf', value=_csrf)
+        input(type='text', name='author', hidden, value=user.profile.name)
+        label(for='content', style='margin-bottom: 5px;display: block;') Comment:
+        textarea(name='content', rows='4', required, style='margin-bottom: 10px; width: 100%; padding: 5px;')
+        .btn.btn-outline-primary(type='submit') Submit Comment

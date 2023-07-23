@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+  h1 All Projects
+  p.lead A boilerplate for Node.js web applications.
+  hr
+  div.row.justify-content-between
+    div.col-6
+      h3
+        | Projects
+    div.col-6.text-end
+      a(href='/project/new', class='btn btn-outline-primary')
+        | Add Project
+
+  table(class='table table-striped table-bordered')
+    thead
+      tr
+        th.text-center Name
+        th.text-center Description
+        th.text-center Team #
+        th
+    tbody
+      each project in projects
+        tr
+          td= project.name
+          td= project.description
+          td.text-center= project.team.length
+          td.text-end
+            a.btn.btn-outline-primary(href='/project?id=' + project.id)
+              | View

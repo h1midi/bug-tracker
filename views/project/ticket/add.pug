@@ -1,0 +1,79 @@
+extends ../../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Ticket Information
+
+  form(action='/project/addTicket?id=' + project.id, method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='title') Title
+      .col-md-7
+        input.form-control(type='text', name='title', id='title', autocomplete='title', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='description') Description
+      .col-md-7
+        input.form-control(type='text', name='description', id='description', autocomplete='description')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right Priority
+      .col-sm-6
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , name='priority', value='High', data-toggle='radio')
+          label.form-check-label High
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , checked=true, name='priority', value='Medium', data-toggle='radio')
+          label.form-check-label Medium
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , name='priority', value='Low', data-toggle='radio')
+          label.form-check-label Low
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , name='priority', value='Urgent', data-toggle='radio')
+          label.form-check-label Urgent
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right Status
+      .col-sm-6
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , checked=true, name='status', value='Open', data-toggle='radio')
+          label.form-check-label Open
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , name='status', value='In Progress', data-toggle='radio')
+          label.form-check-label In Progress
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , name='status', value='Pending', data-toggle='radio')
+          label.form-check-label Pending
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , name='priority', value='Closed', data-toggle='radio')
+          label.form-check-label Closed
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , name='priority', value='Reopened', data-toggle='radio')
+          label.form-check-label Reopened
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right Type
+      .col-sm-6
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , name='type', value='Bug', data-toggle='radio')
+          label.form-check-label Bug
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , checked=true, name='type', value='Task', data-toggle='radio')
+          label.form-check-label Task
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , name='type', value='Enhancement', data-toggle='radio')
+          label.form-check-label Enhancement
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , name='type', value='Support', data-toggle='radio')
+          label.form-check-label Support
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-outline-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Add Ticket

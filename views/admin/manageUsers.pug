@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  h1
+    | Manage Users
+  br
+  table.table-sm(class='table table-striped table-bordered')
+        thead
+          tr
+            th Name
+            th Email
+            th Role
+            th
+        tbody
+          each user in users
+            tr
+              td= user.profile.name
+              td= user.email
+              td= user.profile.role
+              td
+                a.btn.btn-outline-primary.btn-sm(href='/user/?id=' + user.id)
+                  | Manage

@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h1
+    | My Tickets
+  each resault in resaults
+    br
+    h3
+      a(href='/project/?id=' + resault.projectId style='text-decoration: none;')= resault.projectName
+    table(class='table table-striped table-bordered')
+          thead
+            tr
+              th Title
+              th Description
+              th Priority
+              th Status
+              th Type
+              th
+          tbody
+            each ticket in resault.tickets
+              tr
+                td= ticket.title
+                td= ticket.description
+                td= ticket.priority
+                td= ticket.status
+                td= ticket.type
+                td
+                  a.btn.btn-outline-primary.btn-sm(href='/ticket/?pid=' + resault.projectId + '&tid=' + ticket.id)
+                    | View

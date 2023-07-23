@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 User Information
+
+  form(action='/user?id=' + user.id, method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Email
+      .col-md-7
+        input.form-control(type='email', name='email', id='email', value=user.email, autocomplete='email', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Name
+      .col-md-7
+        input.form-control(type='text', name='name', id='name', value=user.profile.name, autocomplete='name')
+    .form-group.row
+      if (user.role == 'Admin')
+      label.col-md-3.col-form-label.font-weight-bold.text-right Role
+      .col-sm-6
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , name='role', checked=user.profile.role=='Admin', value='Admin', data-toggle='radio')
+          label.form-check-label Admin
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , checked=user.profile.role=='Developer', name='role', value='Developer', data-toggle='radio')
+          label.form-check-label Developer
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' , name='role', checked=user.profile.role=='Project Manager', value='Project Manager', data-toggle='radio')
+          label.form-check-label Project Manager
+
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Update User

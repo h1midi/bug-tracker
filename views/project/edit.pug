@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Edit project
+
+  form(action='/project/edit', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Name
+      .col-md-7
+        input.form-control(type='text', name='name', id='name', value=project.name, autocomplete='name', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='description') Description
+      .col-md-7
+        input.form-control(type='text', name='description', id='description', value=project.description, autocomplete)
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-outline-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Update Project
