@@ -123,8 +123,8 @@ app.post('/signup', userController.postSignup);
  */
 app.get('/project', passportConfig.isAuthenticated, projectController.getProjectsById);
 app.get('/project/all', passportConfig.isAuthenticated, projectController.getAllProjects);
-app.get('/project/new', passportConfig.isAuthenticated, projectController.getCreateProgram);
-app.post('/project/new', passportConfig.isAuthenticated, projectController.postCreateProgram);
+app.get('/project/new', passportConfig.isAuthenticated, projectController.getCreateProject);
+app.post('/project/new', passportConfig.isAuthenticated, projectController.postCreateProject);
 app.get('/project/delete', passportConfig.isAuthenticated, projectController.deleteProjectsById);
 app.get('/project/edit', passportConfig.isAuthenticated, projectController.getEditProjectsById);
 app.post('/project/edit', passportConfig.isAuthenticated, projectController.postEditProjectsById);

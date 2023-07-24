@@ -56,7 +56,7 @@ exports.getProjectsById = (req, res, next) => {
  * Create project.
  */
 
-exports.postCreateProgram = (req, res, next) => {
+exports.postCreateProject = (req, res, next) => {
   const project = new Project({
     name: req.body.name,
     description: req.body.description,
@@ -65,21 +65,18 @@ exports.postCreateProgram = (req, res, next) => {
       {
         email: req.user.email,
         name: req.user.profile.name,
-        role: 'Manager',
+        role: 'Project Manager',
       }
     ],
   });
   project.save((err) => {
     if (err) { return next(err); }
-    this.getProjects(req, res);
+    res.redirect('/');
   });
 };
 
-exports.getCreateProgram = (req, res, next) => {
-  Project.findById(getParam('id', req.originalUrl), (err, prjct) => {
-    if (err) { return next(err); }
-    res.render('project/create', { title: 'Create Project', project: prjct });
-  });
+exports.getCreateProject = (req, res, next) => {
+  res.render('project/create', { title: 'Create Project' });
 };
 
 /**
